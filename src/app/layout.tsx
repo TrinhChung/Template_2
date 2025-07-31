@@ -47,7 +47,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={satoshi.className}>
         <HolyLoader color="#868686" />
-        <TopBanner />
+        <TopBanner company={company} />
         <Providers>
           <TopNavbar company={company} />
           {children}
