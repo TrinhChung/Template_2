@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Company } from "@/types/company.types";
 import customFetch from "@/lib/axios/custom";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaIdCard } from "react-icons/fa";
