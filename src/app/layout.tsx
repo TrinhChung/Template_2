@@ -8,11 +8,21 @@ import HolyLoader from "holy-loader";
 import Providers from "./providers";
 import customFetch from "@/lib/axios/custom";
 import { Company } from "@/types/company.types";
+import { headers } from "next/headers";
 
 // Hàm fetch thông tin công ty (dùng lại)
 async function getCompanyInfo() {
   try {
-    const res = await customFetch.get<Company>("/company");
+    // Lấy headers của request
+    const h = headers();
+    // Tìm domain từ host header
+    const domain =
+      h.get("host") || "localhost";
+    const res = await customFetch.get<Company>("/company", {
+      headers: {
+        "X-Client-Domain": domain,
+      },
+    });
     return res.data;
   } catch (e) {
     console.error("Could not fetch company info", e);

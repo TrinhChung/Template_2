@@ -1,4 +1,5 @@
 import axios from "axios";
+import { headers } from "next/headers";
 
 // Lấy base URL từ env (Next.js dùng NEXT_PUBLIC_API_URL cho client-side)
 const baseURL =
@@ -20,8 +21,12 @@ customFetch.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     if (typeof window !== "undefined") {
       // Only in browser
-      const domain = window.location.hostname;
+      // Lấy headers của request
+      const h = headers();
+      // Tìm domain từ host header
+      const domain = h.get("host") || "localhost";
       config.headers = config.headers || {};
+      console.log("Setting X-Client-Domain:", domain);
       config.headers["X-Client-Domain"] = domain;
     }
     return config;

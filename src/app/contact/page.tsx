@@ -1,16 +1,28 @@
 import { Company } from "@/types/company.types";
 import customFetch from "@/lib/axios/custom";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaIdCard } from "react-icons/fa";
+import { headers } from "next/headers";
 
 async function getCompanyInfo() {
   try {
-    const res = await customFetch.get<Company>("/company");
+    // Lấy headers của request
+    const h = headers();
+    // Tìm domain từ host header
+    const domain =
+      h.get("host") || "localhost";
+    // Gọi API với domain
+    const res = await customFetch.get<Company>("/company", {
+      headers: {
+        "X-Client-Domain": domain,
+      },
+    });
     return res.data;
   } catch (e) {
     console.error("Failed to fetch company info", e);
     return null;
   }
 }
+
 
 export default async function ContactPage() {
   const company = await getCompanyInfo();

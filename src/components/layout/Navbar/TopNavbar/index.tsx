@@ -96,7 +96,7 @@ const TopNavbar = ({ company }: { company: Company | null }) => {
             ])}
             aria-label={company?.name || "Home"}
           >
-            {"FASHION"}
+            {company?.name ? company?.name :"FASHION"}
           </Link>
         </div>
         <NavigationMenu className="hidden md:flex mr-2 lg:mr-7">
