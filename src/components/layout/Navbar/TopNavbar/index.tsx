@@ -1,6 +1,4 @@
 "use client"
-import { cn } from "@/lib/utils";
-import { integralCF } from "@/styles/fonts";
 import Link from "next/link";
 import React from "react";
 import { NavMenu } from "../navbar.types";
@@ -15,6 +13,7 @@ import InputGroup from "@/components/ui/input-group";
 import ResTopNavbar from "./ResTopNavbar";
 import CartBtn from "./CartBtn";
 import { Company } from "@/types/company.types";
+import BrandName from "@/components/common/BrandName";
 
 const data: NavMenu = [
   {
@@ -79,8 +78,6 @@ const data: NavMenu = [
 ];
 
 const TopNavbar = ({ company }: { company: Company | null }) => {
-  console.log('Company in TopNavbar:', company)
-
   return (
     <nav className="sticky top-0 bg-white z-20">
       <div className="flex relative max-w-frame mx-auto items-center justify-between md:justify-start py-5 md:py-6 px-4 xl:px-0">
@@ -90,13 +87,10 @@ const TopNavbar = ({ company }: { company: Company | null }) => {
           </div>
           <Link
             href="/"
-            className={cn([
-              integralCF.className,
-              "text-2xl lg:text-[32px] mb-2 mr-3 lg:mr-10",
-            ])}
+            className="text-2xl lg:text-[32px] mb-2 mr-3 lg:mr-10"
             aria-label={company?.name || "Home"}
           >
-            {company?.name ? company?.name :"FASHION"}
+            <BrandName text={company?.name} />
           </Link>
         </div>
         <NavigationMenu className="hidden md:flex mr-2 lg:mr-7">

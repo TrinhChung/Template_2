@@ -1,6 +1,4 @@
 // src/components/layout/Footer/index.tsx
-import { cn } from "@/lib/utils";
-import { integralCF } from "@/styles/fonts";
 import React from "react";
 import { SocialNetworks } from "./footer.types";
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter, FaHome, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
@@ -8,6 +6,7 @@ import Link from "next/link";
 import LinksSection from "./LinksSection";
 import LayoutSpacing from "./LayoutSpacing";
 import { Company } from "@/types/company.types";
+import BrandName from "@/components/common/BrandName";
 
 const socialsData: SocialNetworks[] = [
   { id: 1, icon: <FaTwitter />, url: "https://twitter.com" },
@@ -23,8 +22,8 @@ const Footer = ({ company }: { company: Company | null }) => {
         <div className="grid md:grid-cols-3 gap-12 mb-8">
           {/* 1. THÔNG TIN CÔNG TY */}
           <div>
-            <h1 className={cn([integralCF.className, "text-[28px] lg:text-[32px] mb-2"])}>
-              {company?.name || ""}
+            <h1 className="text-[28px] lg:text-[32px] mb-2">
+              <BrandName text={company?.name} fallback="" />
             </h1>
             {company?.address && (
               <div className="flex items-start mb-1 gap-2">
